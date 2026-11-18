@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}My Shop{% endblock %}</title>
+    <style>
+        :root {
+            --bg: #faf8f5;
+            --card: #ffffff;
+            --text: #1c1917;
+            --muted: #78716c;
+            --border: #e7e5e4;
+            --accent: #4f46e5;
+            --accent-dark: #4338ca;
+            --ok-bg: #dcfce7;
+            --ok-text: #15803d;
+            --bad-bg: #fee2e2;
+            --bad-text: #b91c1c;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+        }
+
+        a { color: var(--accent); text-decoration: none; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        /* Header */
+        header { background: var(--card); border-bottom: 1px solid var(--border); }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .brand { font-size: 1.3rem; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
+        .brand span { color: var(--accent); }
+        nav a { margin-left: 24px; color: var(--muted); font-weight: 500; }
+        nav a:hover { color: var(--accent); }
+
+        main { padding: 40px 0 60px; min-height: 70vh; }
+
+        footer { border-top: 1px solid var(--border); background: var(--card); padding: 20px 0; text-align: center; color: var(--muted); font-size: 0.9rem; }
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: background 0.15s, transform 0.15s;
+        }
+        .button:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+        /* Badges */
+        .badge { display: inline-block; padding: 3px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+        .badge-category { background: #eef2ff; color: var(--accent); }
+        .badge-ok { background: var(--ok-bg); color: var(--ok-text); }
+        .badge-bad { background: var(--bad-bg); color: var(--bad-text); }
+
+        /* Placeholder image */
+        .thumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: #fff;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .page-title { font-size: 2rem; margin: 0 0 24px; letter-spacing: -0.5px; }
+        .muted { color: var(--muted); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <a href="{% url 'home' %}" class="brand">My<span>Shop</span></a>
+            <nav>
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'products' %}">Products</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">&copy; MyShop. All rights reserved.</div>
+    </footer>
+</body>
+</html>

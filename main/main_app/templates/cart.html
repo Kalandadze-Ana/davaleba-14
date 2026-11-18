@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Cart - MyShop{% endblock %}
+
+{% block content %}
+<style>
+    .cart-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+
+    table { width: 100%; border-collapse: collapse; }
+    th { background: #f5f5f4; color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    th, td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--border); }
+    tbody tr:last-child td { border-bottom: none; }
+    .num { text-align: right; }
+
+    .cart-total { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: #f5f5f4; font-size: 1.2rem; }
+    .cart-total strong { color: var(--accent); font-size: 1.5rem; }
+
+    .empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+</style>
+
+<h1 class="page-title">{{ customer }}'s cart</h1>
+
+<div class="cart-box">
+    {% if items %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th class="num">Price</th>
+                    <th class="num">Quantity</th>
+                    <th class="num">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td><a href="{% url 'product_detail' item.product.id %}">{{ item.product.name }}</a></td>
+                        <td class="num">{{ item.product.price }} GEL</td>
+                        <td class="num">{{ item.quantity }}</td>
+                        <td class="num">{% widthratio item.product.price 1 item.quantity %} GEL</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="cart-total">
+            <span>Total</span>
+            <strong>{{ total }} GEL</strong>
+        </div>
+    {% else %}
+        <div class="empty">
+            <p>The cart is empty.</p>
+            <a href="{% url 'products' %}" class="button">Browse products</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
